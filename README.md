@@ -2,7 +2,7 @@
 
 > Decrypt the `.vndat` file
 
-Decrypt the light.vn `.vndat` file. Only test in [U-ena](https://store.steampowered.com/app/1744570/Uena/).
+Only test in [U-ena](https://store.steampowered.com/app/1744570/Uena/).
 
 ## Build
 
