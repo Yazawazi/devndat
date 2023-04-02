@@ -15,6 +15,7 @@ publish = false
 [dependencies]
 clap = { version = "4.2.1", features = ["derive", "cargo"] }
 zip = "0.6.4"
+pbr = "1.1.1"
 
 [profile.release]
 opt-level = 3

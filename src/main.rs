@@ -1,4 +1,5 @@
 use clap::Parser;
+use pbr::ProgressBar;
 use std::fs;
 use std::fs::File;
 use std::io::{Read, Write};
@@ -46,20 +47,21 @@ fn un_zip_with_decrypt_pk_file(pk_file: &PathBuf, folder: &Path) {
 
     let file = File::open(pk_file).unwrap();
     let mut zip_file = ZipArchive::new(file).unwrap();
+    let files_count = zip_file.len();
 
-    for i in 0..zip_file.len() {
+    let mut progress_bar = ProgressBar::new(files_count as u64);
+
+    for i in 0..files_count {
         let mut file = zip_file.by_index(i).unwrap();
         let file_path = folder.join(file.name());
 
         fs::create_dir_all(file_path.parent().unwrap()).unwrap();
 
-        if file.is_dir() {
-            println!("Creating folder: {}", file.name());
+        progress_bar.message(&format!("{} ", file.name()));
 
+        if file.is_dir() {
             fs::create_dir_all(folder.join(file.name())).unwrap();
         } else {
-            println!("Decrypting file: {}", file.name());
-
             let mut buffer = Vec::new();
             file.read_to_end(&mut buffer).unwrap();
 
@@ -92,6 +94,8 @@ fn un_zip_with_decrypt_pk_file(pk_file: &PathBuf, folder: &Path) {
             }
             out_file.write_all(&buffer).unwrap();
         }
+
+        progress_bar.inc();
     }
 }
 
