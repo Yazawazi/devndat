@@ -77,7 +77,7 @@ fn un_zip_with_decrypt_pk_file(pk_file: &PathBuf, folder: &Path) {
                 if length == 0 {
                     println!("File is empty: {}", file.name());
                 } else {
-                    println!("File size is smaller than 99: {}", file.name());
+                    println!("File size is smaller than 100: {}", file.name());
 
                     for i in 0..length {
                         buffer[i] ^= REVERSED_KEY[i % 25];
