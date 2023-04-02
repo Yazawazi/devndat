@@ -71,7 +71,7 @@ fn un_zip_with_decrypt_pk_file(pk_file: &PathBuf, folder: &Path) {
 
             let mut out_file = File::create(&file_path).unwrap();
 
-            if length < 99 {
+            if length < 100 {
                 if length == 0 {
                     println!("File is empty: {}", file.name());
                 } else {
